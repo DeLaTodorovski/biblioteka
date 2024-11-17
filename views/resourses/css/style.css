@@ -1,0 +1,33 @@
+.tooltip {  
+    position: relative;  
+    display: inline-block;  
+    border-bottom: 1px dotted black;  
+}  
+
+    .tooltip .tooltiptext {  
+        visibility: hidden;  
+        width: 500px;  
+        background-color: black;  
+        color: #fff;  
+        text-align: center;  
+        border-radius: 6px;  
+        padding: 5px 0;  
+        /* Position the tooltip */  
+        position: absolute;  
+        z-index: 1;  
+        bottom: 100%;  
+        left: 50%;  
+        margin-left: -60px;  
+    }  
+
+    .tooltip:hover .tooltiptext {  
+        visibility: visible;  
+    }  
+
+    .zoom {
+        transition: transform .2s; /* Animation */
+      }
+      
+      .zoom:hover {
+        transform: scale(5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+      }

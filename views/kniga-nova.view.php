@@ -3,14 +3,14 @@
 <?php require('partials/banner.php') ?>
 
 <main>
+    
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="md:grid md:grid-cols-3 md:gap-6">
-
-        <p class="mb-6">
-            <a href="<?= realUrl('knigi') ?>" class="text-blue-500 underline">назад...</a>
-        </p>    
-            <div class="mt-5 md:col-span-2 md:mt-0">
-
+  
+            <div class="mt-5 md:col-span-5 md:mt-0">
+            <p class="mb-2">
+            <a href="<?= realUrl('knigi') ?>" class="text-blue-500 underline"><< назад...</a>
+        </p> 
             <?php if (isset($message['success'])) : ?> 
                 <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-green-100 bg-green-700 border border-green-700 ">
             <div slot="avatar">
@@ -69,7 +69,7 @@
                                         name="objasnuvanje"
                                         rows="3"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        placeholder="Here's an idea for a note..."
+                                        placeholder="Внесете текст тука..."
                                     ><?= $_POST['objasnuvanje'] ?? '' ?></textarea>
 
                                     <?php if (isset($errors['objasnuvanje'])) : ?>
