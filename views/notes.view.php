@@ -317,7 +317,7 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
             ?>
           
            </p>
-           <div class="flex gap-1">    
+           <div class="flex gap-1">     
            <?php    
           
 if((int)($strana) == 1){
