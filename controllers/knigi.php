@@ -20,4 +20,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-require "views/knigi.view.php";
+require "views/knigi.view.php";  

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (! Validator::emptyPost('imeKniga') ){
-        $errors['imeKniga'] = 'Полето е задолжително.';
+        $errors['imeKniga'] = 'Полето е задолжително.';    
     }
     
     if (! Validator::emptyPost('objasnuvanje') ){

@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     if (! Validator::emptyPost('objasnuvanje') ){
-        $errors['objasnuvanje'] = 'Полето е задолжително.';
+        $errors['objasnuvanje'] = 'Полето е задолжително.';  
     }
     if (! Validator::emptyPost('avtori') ){
         $errors['avtori'] = 'Полето е задолжително.';
