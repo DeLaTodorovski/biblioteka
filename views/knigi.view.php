@@ -8,49 +8,7 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
 <?php require('partials/head.php') ?>
 <?php require('partials/nav.php') ?>
 <?php require('partials/banner.php') ?>
-<style>
-    .tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: default;
-}
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  padding: 0.25em 0.5em;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 0.25em;
-  white-space: nowrap;
-
-  
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-  top: 100%;
-  left: 100%;
-  transition-property: visibility;
-  transition-delay: 0s;
-
-}
-
-.tooltip:hover .tooltiptext {
-
-  visibility: visible;
-  transition-delay: 0.3s;
-  min-width:500px; /* I have changed here */
-    max-width:500px;
-}
-
-.zoom {
-  transition: transform .2s; /* Animation */
-}
-
-.zoom:hover {
-  transform: scale(5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-}
-</style>
 <main>
     <!-- <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
        
@@ -100,7 +58,7 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                type="button">
                Види ги сите
                </button>
-               <a href="<?= realUrl('knigi/nova') ?>"
+               <a href="<?= realUrl('kniga/nova') ?>"
                class="flex select-none items-center gap-2 rounded bg-slate-800 py-2.5 px-4 text-xs font-semibold text-white shadow-md shadow-slate-900/10 transition-all hover:shadow-lg hover:shadow-slate-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                type="button">
                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
@@ -148,6 +106,18 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
                    Автори
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                       stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                       <path stroke-linecap="round" stroke-linejoin="round"
+                       d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                   </svg>
+                   </p>
+               </th>
+               <th
+                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                   <p
+                   class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
+                   Категорија
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                        stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                        <path stroke-linecap="round" stroke-linejoin="round"
@@ -230,11 +200,14 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
                        <p class="text-sm font-semibold text-slate-700">
                           
                           <a href="./kniga?id=<?= $note['id'] ?>"  class="text-blue-500 hover:underline">
-                          <?= htmlspecialchars($note['imeKniga']) ?>
-                    </a>
+                          <?= htmlspecialchars($note['imeKniga']) ?> </a>
                         </p>
- 
+
                    </div>
+                   <div class="tooltip">                       
+                        &#9432;
+                             <span class="tooltiptext"><?= htmlspecialchars($note['objasnuvanje']) ?></span>
+                        </div>  
                    </div>
                </td>
                <td class="p-4 border-b border-slate-200">
@@ -247,6 +220,14 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
                        <?= htmlspecialchars($note['avtori']) ?>
                    </p>
                    </div>
+               </td>
+               <td class="p-4 border-b border-slate-200">
+                   <p class="text-sm text-slate-500">
+                    <?= $note['kategorija'] === 0 ? 'Учебници' : '' ?>
+                    <?= $note['kategorija'] === 1 ? 'Лектири' : '' ?>
+                    <?= $note['kategorija'] === 2 ? 'Стручна литература' : '' ?>
+                    <?= $note['kategorija'] === 3 ? 'Списанија' : '' ?>
+                   </p>
                </td>
                <td class="p-4 border-b border-slate-200">
                    <p class="text-sm text-slate-500">
@@ -295,10 +276,7 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                     </svg>
                    </a>
-                   <div class="tooltip">                       
-                        &#9432;
-                             <span class="tooltiptext"><?= htmlspecialchars($note['objasnuvanje']) ?></span>
-                        </div>  
+                 
                </td>
                </tr>
              

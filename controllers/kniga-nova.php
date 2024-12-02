@@ -70,4 +70,4 @@ if(isset($_FILES["slika"]) && !empty($_FILES["slika"]["name"])) {
     }
 }
 
-require 'views/note-create.view.php';
+require 'views/kniga-nova.view.php';

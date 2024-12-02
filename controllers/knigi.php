@@ -1,7 +1,9 @@
 <?php
 
+//phpinfo();
 $config = require('config.php');
 $db = new Database($config['database']);
+$converter = new Encryption;
 
 $heading = 'Книги';
 
@@ -19,5 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$passSha =  md5('mirjance@123');
+echo $passSha;
 
-require "views/notes.view.php";
+$pass = 'mirjance@123';
+
+
+
+$encoded = $converter->encode($pass, $passSha);
+$decoded = $converter->decode($encoded, $passSha);    
+
+echo "<p>$encoded<p>$decoded";
+
+require "views/knigi.view.php";
