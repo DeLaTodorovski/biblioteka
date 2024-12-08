@@ -35,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (! Validator::emptyPost('godina') ){
         $errors['godina'] = 'Полето е задолжително.';
     }
+    if (! Validator::emptyPost('kolicina') ){
+        $errors['godina'] = 'Полето е задолжително.';
+    }
 
 
 
@@ -53,20 +56,40 @@ if(isset($_FILES["slika"]) && !empty($_FILES["slika"]["name"])) {
 
 
     if (empty($errors)) {
-        $db->query('INSERT INTO knigi(imeKniga, objasnuvanje, slika, tiraz, kategorija, avtori, izdavac, godina, oddelenie, cena, stat) VALUES(:imeKniga, :objasnuvanje, :slika, :tiraz, :kategorija, :avtori, :izdavac, :godina, :oddelenie, :cena, :stat)', [
-            'imeKniga' => $_POST['imeKniga'],
-            'objasnuvanje' => $_POST['objasnuvanje'],
-            'slika' => $compressedImage,
-            'tiraz' => $_POST['tiraz'],
-            'kategorija' => $_POST['kategorija'],
-            'avtori' => $_POST['avtori'],
-            'izdavac' => $_POST['izdavac'],
-            'godina' => $_POST['godina'],
-            'oddelenie' => $_POST['oddelenie'],
-            'cena' => $_POST['cena'],
-            'stat' => $_POST['stat']
-        ]);
-            $message['success'] = 'Успешно внесена книга со наслов' .$_POST['imeKniga'];
+        if($_POST['stat']  > 1){
+            for($i=0; $i <= $_POST['stat']; $i++){
+                $db->query('INSERT INTO knigi(imeKniga, objasnuvanje, slika, tiraz, kategorija, avtori, izdavac, godina, oddelenie, cena, stat) VALUES(:imeKniga, :objasnuvanje, :slika, :tiraz, :kategorija, :avtori, :izdavac, :godina, :oddelenie, :cena, :stat)', [
+                    'imeKniga' => $_POST['imeKniga'],
+                    'objasnuvanje' => $_POST['objasnuvanje'],
+                    'slika' => $compressedImage,
+                    'tiraz' => $_POST['tiraz'],
+                    'kategorija' => $_POST['kategorija'],
+                    'avtori' => $_POST['avtori'],
+                    'izdavac' => $_POST['izdavac'],
+                    'godina' => $_POST['godina'],
+                    'oddelenie' => $_POST['oddelenie'],
+                    'cena' => $_POST['cena'],
+                    'stat' => $_POST['stat']
+                ]);
+                    $message['success'] = 'Успешно внесена книга со наслов' .$_POST['imeKniga'];
+            }
+
+        }else{
+            $db->query('INSERT INTO knigi(imeKniga, objasnuvanje, slika, tiraz, kategorija, avtori, izdavac, godina, oddelenie, cena, stat) VALUES(:imeKniga, :objasnuvanje, :slika, :tiraz, :kategorija, :avtori, :izdavac, :godina, :oddelenie, :cena, :stat)', [
+                'imeKniga' => $_POST['imeKniga'],
+                'objasnuvanje' => $_POST['objasnuvanje'],
+                'slika' => $compressedImage,
+                'tiraz' => $_POST['tiraz'],
+                'kategorija' => $_POST['kategorija'],
+                'avtori' => $_POST['avtori'],
+                'izdavac' => $_POST['izdavac'],
+                'godina' => $_POST['godina'],
+                'oddelenie' => $_POST['oddelenie'],
+                'cena' => $_POST['cena'],
+                'stat' => $_POST['stat']
+            ]);
+                $message['success'] = 'Успешно внесена книга со наслов' .$_POST['imeKniga'];
+        }
     }
 }
 

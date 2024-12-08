@@ -171,12 +171,12 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                </tr>
            </thead>
 <?php
-$nb_elem_per_page = 2;
+
 $page = isset($_GET['strana'])?intval($_GET['strana']-1):0;
-$number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
+$number_of_pages = intval(count($notes)/$per_page)+1;
 ?>
            <tbody>
-         <?php foreach (array_slice($notes, $page*$nb_elem_per_page, $nb_elem_per_page) as $note) : ?>
+         <?php foreach (array_slice($notes, $page*$per_page, $per_page) as $note) : ?>
                <tr>
                <td class="p-4 border-b border-slate-200">
                    <div class="flex flex-col">
@@ -297,62 +297,98 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
            </p>
            <div class="flex gap-1">    
            <?php    
-          
-if((int)($strana) == 1){
-        ?>
-            <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button">
-               Претходна
-           </button>
-        <?php
-            }else{
-                ?>
-           <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button" onclick="location.href='?strana=<?=((int)($strana-1))?>'">
-               Претходна
-           </button>
-           <?php
-            }
-        ?>
+                
            
-           <?php
-
-            for($i=1;$i<$number_of_pages+1;$i++){
-            ?>
-                <button
-                class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
-                onclick="location.href='?strana=<?=((int)($i))?>'">
-                    <?php
-                    if ($i == $strana) {
-                        echo "<b>".$i."</b>";
-                        
-                    } else {
-                        echo $i;
+                $total_pages = ceil($brknigi / $per_page);
+            
+                if($brknigi > $per_page){
+                              
+                    if((int)($strana) == 1){
+   
+                            }else{
+                                ?>
+                            <button
+                    class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    type="button" onclick="location.href='?strana=1'">
+                    Прва
+                </button>
+                        <button
+                            class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button" onclick="location.href='?strana=<?=((int)($strana-1))?>'">
+                            <
+                        </button>
+                        <?php
+                            }
+        
+            
+                    // Superset range of pages
+                    $superset_range = range(1, $total_pages);
+            
+                    // subset range of pages to display
+                    $subset_range = range($strana - 1, $strana + 1);
+            
+                    // adjust the range(if required)
+                    foreach($subset_range as $p){
+                        if($p < 1){
+                            array_shift($subset_range);
+                            if(in_array($subset_range[count($subset_range) - 1] + 1, $superset_range)){
+                                $subset_range[] = $subset_range[count($subset_range) - 1] + 1;
+                            }
+                        }elseif($p > $total_pages){
+                            array_pop($subset_range);
+                            if(in_array($subset_range[0] - 1, $superset_range)){
+                                array_unshift($subset_range, $subset_range[0] - 1);
+                            }
+                        }
                     }
-                    ?>
-               </button>
-            <?php
-            }    
-          
-if(($strana) == $number_of_pages){
-        ?>
-            <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button">
-               Следна
-           </button>
-        <?php
-            }else{
-                ?>
-           <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button" onclick="location.href='?strana=<?=((int)($strana+1))?>'">
-               Следна
-           </button>
-           <?php
-            }
+            
+                    // display intermediate pagination links
+                    if($subset_range[0] > $superset_range[0]){
+                        echo " ...&nbsp;";
+                    }
+                    foreach($subset_range as $p){
+                        ?>
+                        <button
+                        class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
+                        onclick="location.href='?strana=<?=((int)($p))?>'">
+                            <?php
+                            if ($p == $strana) {
+                                echo "<b>".$p."</b>";
+                                
+                            } else {
+                                echo $p;
+                            }
+                            ?>
+                       </button>
+                       <?php
+            
+                    }
+                    if($subset_range[count($subset_range) - 1] < $superset_range[count($superset_range) - 1]){
+                        echo "&nbsp;... ";
+                    }
+
+                    if(($strana) == $number_of_pages){
+
+                            }else{
+                                ?>
+                           <button
+                               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                               type="button" onclick="location.href='?strana=<?=((int)($strana+1))?>'">
+                               >
+                           </button>
+                           <button
+                               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                               type="button" onclick="location.href='?strana=<?=$total_pages?>'">
+                               Последна
+                           </button>
+                           <?php
+                            }
+                            ?>
+
+                           <?php
+                }    
+      
+
         ?>
 
            </div>

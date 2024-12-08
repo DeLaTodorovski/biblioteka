@@ -127,7 +127,7 @@
                                 <label
                                     for="tiraz"
                                     class="block text-sm font-medium text-gray-700"
-                                >Количина</label>
+                                >Тираж</label>
                                 <div class="mt-1">
                                     <input type="number" min="0"
                                         id="tiraz"
@@ -178,6 +178,8 @@
                                             <?php 
                                             if ($year === 2024) {
                                                 $extraop = "selected";
+                                            }else{
+                                                $extraop = "";
                                             }
                                             ?>
                                             <option value="<?php echo $year; ?>" <?php echo $extraop; ?>><?php echo $year; ?></option>
@@ -274,15 +276,35 @@
                                         name="stat"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option>Избери статус</option>
-                                        <?php foreach($years as $year) : ?>
+                                        
                                             <option value="0" selected>Нова</option>
                                             <option value="1">Зачувана</option>
                                             <option value="2">Стара</option>
                                             <option value="3">Оштетена/и</option>
-                                        <?php endforeach; ?>
+                                        
                                     </select>
                                     <?php if (isset($errors['stat'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['stat'] ?></p>
+                                    <?php endif; ?>
+                                    <?php if (isset($errors['empty'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['empty'] ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    for="cena"
+                                    class="block text-sm font-medium text-gray-700"
+                                >Количина</label>
+                                <div class="mt-1">
+                                    <input type="number" min="0"
+                                        id="kolicina"
+                                        name="kolicina"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        value="1" >
+
+                                    <?php if (isset($errors['cena'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['cena'] ?></p>
                                     <?php endif; ?>
                                     <?php if (isset($errors['empty'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['empty'] ?></p>

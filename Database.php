@@ -28,6 +28,11 @@ class Database
         return $this->statement->fetchAll();
     }
 
+    public function rowCount()
+    {
+        return $this->statement->rowCount();
+    }
+
     public function find()
     {
         return $this->statement->fetch();

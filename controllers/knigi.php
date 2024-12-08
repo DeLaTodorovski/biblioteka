@@ -6,7 +6,8 @@ $db = new Database($config['database']);
 $heading = 'Книги';
 
 $notes = $db->query('select * from knigi')->get();
-
+$brknigi = $db->query('select * from knigi')->rowCount();
+$per_page = 5;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
