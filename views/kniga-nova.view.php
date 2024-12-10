@@ -3,6 +3,19 @@
 <?php require('partials/banner.php') ?>
 
 <main>
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:views/note-create.view.php
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div class="md:grid md:grid-cols-3 md:gap-6">
+
+        <p class="mb-6">
+            <a href="<?= realUrl('knigi') ?>" class="text-blue-500 underline">назад...</a>
+        </p>    
+            <div class="mt-5 md:col-span-2 md:mt-0">
+
+========
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
     
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -11,6 +24,10 @@
             <p class="mb-2">
             <a href="<?= realUrl('knigi') ?>" class="text-blue-500 underline"><< назад...</a>
         </p> 
+<<<<<<< HEAD
+=======
+>>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/kniga-nova.view.php
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
             <?php if (isset($message['success'])) : ?> 
                 <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-green-100 bg-green-700 border border-green-700 ">
             <div slot="avatar">
@@ -127,7 +144,11 @@
                                 <label
                                     for="tiraz"
                                     class="block text-sm font-medium text-gray-700"
+<<<<<<< HEAD
                                 >Количина</label>
+=======
+                                >Тираж</label>
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                 <div class="mt-1">
                                     <input type="number" min="0"
                                         id="tiraz"
@@ -178,6 +199,11 @@
                                             <?php 
                                             if ($year === 2024) {
                                                 $extraop = "selected";
+<<<<<<< HEAD
+=======
+                                            }else{
+                                                $extraop = "";
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                             }
                                             ?>
                                             <option value="<?php echo $year; ?>" <?php echo $extraop; ?>><?php echo $year; ?></option>
@@ -274,12 +300,20 @@
                                         name="stat"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option>Избери статус</option>
+<<<<<<< HEAD
                                         <?php foreach($years as $year) : ?>
+=======
+                                        
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                             <option value="0" selected>Нова</option>
                                             <option value="1">Зачувана</option>
                                             <option value="2">Стара</option>
                                             <option value="3">Оштетена/и</option>
+<<<<<<< HEAD
                                         <?php endforeach; ?>
+=======
+                                        
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                     </select>
                                     <?php if (isset($errors['stat'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['stat'] ?></p>
@@ -289,6 +323,29 @@
                                     <?php endif; ?>
                                 </div>
                             </div>
+<<<<<<< HEAD
+=======
+                            <div>
+                                <label
+                                    for="cena"
+                                    class="block text-sm font-medium text-gray-700"
+                                >Количина</label>
+                                <div class="mt-1">
+                                    <input type="number" min="0"
+                                        id="kolicina"
+                                        name="kolicina"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        value="1" >
+
+                                    <?php if (isset($errors['cena'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['cena'] ?></p>
+                                    <?php endif; ?>
+                                    <?php if (isset($errors['empty'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['empty'] ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                         </div>
 
                         <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">

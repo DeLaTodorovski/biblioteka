@@ -8,7 +8,53 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
 <?php require('partials/head.php') ?>
 <?php require('partials/nav.php') ?>
 <?php require('partials/banner.php') ?>
+<<<<<<< HEAD
 
+=======
+<style>
+    .tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  padding: 0.25em 0.5em;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.25em;
+  white-space: nowrap;
+
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 100%;
+  transition-property: visibility;
+  transition-delay: 0s;
+
+}
+
+.tooltip:hover .tooltiptext {
+
+  visibility: visible;
+  transition-delay: 0.3s;
+  min-width:500px; /* I have changed here */
+    max-width:500px;
+}
+
+.zoom {
+  transition: transform .2s; /* Animation */
+}
+
+.zoom:hover {
+  transform: scale(5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+</style>
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
 <main>
     <!-- <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
        
@@ -58,7 +104,15 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                type="button">
                Види ги сите
                </button>
+<<<<<<< HEAD
                <a href="<?= realUrl('kniga/nova') ?>"
+=======
+<<<<<<<< HEAD:views/notes.view.php
+               <a href="<?= realUrl('knigi/nova') ?>"
+========
+               <a href="<?= realUrl('kniga/nova') ?>"
+>>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                class="flex select-none items-center gap-2 rounded bg-slate-800 py-2.5 px-4 text-xs font-semibold text-white shadow-md shadow-slate-900/10 transition-all hover:shadow-lg hover:shadow-slate-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                type="button">
                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
@@ -171,12 +225,27 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                </tr>
            </thead>
 <?php
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:views/notes.view.php
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
 $nb_elem_per_page = 2;
 $page = isset($_GET['strana'])?intval($_GET['strana']-1):0;
 $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
 ?>
            <tbody>
          <?php foreach (array_slice($notes, $page*$nb_elem_per_page, $nb_elem_per_page) as $note) : ?>
+<<<<<<< HEAD
+=======
+========
+
+$page = isset($_GET['strana'])?intval($_GET['strana']-1):0;
+$number_of_pages = intval(count($notes)/$per_page)+1;
+?>
+           <tbody>
+         <?php foreach (array_slice($notes, $page*$per_page, $per_page) as $note) : ?>
+>>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                <tr>
                <td class="p-4 border-b border-slate-200">
                    <div class="flex flex-col">
@@ -200,7 +269,16 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
                        <p class="text-sm font-semibold text-slate-700">
                           
                           <a href="./kniga?id=<?= $note['id'] ?>"  class="text-blue-500 hover:underline">
+<<<<<<< HEAD
                           <?= htmlspecialchars($note['imeKniga']) ?> </a>
+=======
+<<<<<<<< HEAD:views/notes.view.php
+                          <?= htmlspecialchars($note['imeKniga']) ?>
+                    </a>
+========
+                          <?= htmlspecialchars($note['imeKniga']) ?> </a>
+>>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                         </p>
 
                    </div>
@@ -276,7 +354,18 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                     </svg>
                    </a>
+<<<<<<< HEAD
                  
+=======
+<<<<<<<< HEAD:views/notes.view.php
+                   <div class="tooltip">                       
+                        &#9432;
+                             <span class="tooltiptext"><?= htmlspecialchars($note['objasnuvanje']) ?></span>
+                        </div>  
+========
+                 
+>>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                </td>
                </tr>
              
@@ -297,6 +386,10 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
            </p>
            <div class="flex gap-1">    
            <?php    
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:views/notes.view.php
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
           
 if((int)($strana) == 1){
         ?>
@@ -353,6 +446,103 @@ if(($strana) == $number_of_pages){
            </button>
            <?php
             }
+<<<<<<< HEAD
+=======
+========
+                
+           
+                $total_pages = ceil($brknigi / $per_page);
+            
+                if($brknigi > $per_page){
+                              
+                    if((int)($strana) == 1){
+   
+                            }else{
+                                ?>
+                            <button
+                    class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    type="button" onclick="location.href='?strana=1'">
+                    Прва
+                </button>
+                        <button
+                            class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button" onclick="location.href='?strana=<?=((int)($strana-1))?>'">
+                            <
+                        </button>
+                        <?php
+                            }
+        
+            
+                    // Superset range of pages
+                    $superset_range = range(1, $total_pages);
+            
+                    // subset range of pages to display
+                    $subset_range = range($strana - 1, $strana + 1);
+            
+                    // adjust the range(if required)
+                    foreach($subset_range as $p){
+                        if($p < 1){
+                            array_shift($subset_range);
+                            if(in_array($subset_range[count($subset_range) - 1] + 1, $superset_range)){
+                                $subset_range[] = $subset_range[count($subset_range) - 1] + 1;
+                            }
+                        }elseif($p > $total_pages){
+                            array_pop($subset_range);
+                            if(in_array($subset_range[0] - 1, $superset_range)){
+                                array_unshift($subset_range, $subset_range[0] - 1);
+                            }
+                        }
+                    }
+            
+                    // display intermediate pagination links
+                    if($subset_range[0] > $superset_range[0]){
+                        echo " ...&nbsp;";
+                    }
+                    foreach($subset_range as $p){
+                        ?>
+                        <button
+                        class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
+                        onclick="location.href='?strana=<?=((int)($p))?>'">
+                            <?php
+                            if ($p == $strana) {
+                                echo "<b>".$p."</b>";
+                                
+                            } else {
+                                echo $p;
+                            }
+                            ?>
+                       </button>
+                       <?php
+            
+                    }
+                    if($subset_range[count($subset_range) - 1] < $superset_range[count($superset_range) - 1]){
+                        echo "&nbsp;... ";
+                    }
+
+                    if(($strana) == $number_of_pages){
+
+                            }else{
+                                ?>
+                           <button
+                               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                               type="button" onclick="location.href='?strana=<?=((int)($strana+1))?>'">
+                               >
+                           </button>
+                           <button
+                               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                               type="button" onclick="location.href='?strana=<?=$total_pages?>'">
+                               Последна
+                           </button>
+                           <?php
+                            }
+                            ?>
+
+                           <?php
+                }    
+      
+
+>>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
         ?>
 
            </div>

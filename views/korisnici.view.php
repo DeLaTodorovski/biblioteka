@@ -91,8 +91,8 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
        <div class="relative mx-4 mt-4 overflow-hidden text-slate-700 bg-white rounded-none bg-clip-border">
            <div class="flex items-center justify-between ">
                <div>
-                   <h3 class="text-lg font-semibold text-slate-800">Листа на книги</h3>
-                   <p class="text-slate-500">Сите книги внесени во базата</p>
+                   <h3 class="text-lg font-semibold text-slate-800">Листа на корисници</h3>
+                   <p class="text-slate-500">Сите корисници (ученици/наставници) внесени во базата</p>
                </div>
            <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
                <button
@@ -100,7 +100,7 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                type="button">
                Види ги сите
                </button>
-               <a href="<?= realUrl('knigi/nova') ?>"
+               <a href="<?= realUrl('korisnik/nov') ?>"
                class="flex select-none items-center gap-2 rounded bg-slate-800 py-2.5 px-4 text-xs font-semibold text-white shadow-md shadow-slate-900/10 transition-all hover:shadow-lg hover:shadow-slate-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                type="button">
                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
@@ -109,7 +109,7 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z">
                    </path>
                </svg>
-               Додади книга
+               Додади корисник
                 </a>
            </div>
            </div>
@@ -135,7 +135,7 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm font-normal leading-none text-slate-500">
-                   Наслов
+                   Име
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                        stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                        <path stroke-linecap="round" stroke-linejoin="round"
@@ -147,7 +147,7 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
-                   Автори
+                   Презиме
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                        stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                        <path stroke-linecap="round" stroke-linejoin="round"
@@ -159,7 +159,7 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
-                   Година
+                   Е-маил
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                        stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                        <path stroke-linecap="round" stroke-linejoin="round"
@@ -172,6 +172,18 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
                    Одделение
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                       stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                       <path stroke-linecap="round" stroke-linejoin="round"
+                       d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                   </svg>
+                   </p>
+               </th>
+               <th
+                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                   <p
+                   class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
+                   Класен раководител
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                        stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                        <path stroke-linecap="round" stroke-linejoin="round"
@@ -201,12 +213,11 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                </tr>
            </thead>
 <?php
-$nb_elem_per_page = 2;
 $page = isset($_GET['strana'])?intval($_GET['strana']-1):0;
-$number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
+$number_of_pages = intval(count($notes)/$per_page)+1;
 ?>
            <tbody>
-         <?php foreach (array_slice($notes, $page*$nb_elem_per_page, $nb_elem_per_page) as $note) : ?>
+         <?php foreach (array_slice($notes, $page*$per_page, $per_page) as $note) : ?>
                <tr>
                <td class="p-4 border-b border-slate-200">
                    <div class="flex flex-col">
@@ -216,25 +227,14 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
                    </div>
                </td>
                <td class="p-4 border-b border-slate-200">
-                   <div class="flex items-center gap-3">
-
-
-                   <div class="zoom">  <img src="<?= htmlspecialchars($note['slika'])  ?>"
-                   class="relative inline-block h-10 w-8  object-cover object-center" />
-                  </div>
-
                    <div class="flex flex-col">
-                       <!-- <p
-                       class="text-sm text-slate-500"> 
-                       </p> -->
-                       <p class="text-sm font-semibold text-slate-700">
-                          
-                          <a href="./kniga?id=<?= $note['id'] ?>"  class="text-blue-500 hover:underline">
-                          <?= htmlspecialchars($note['imeKniga']) ?>
-                    </a>
-                        </p>
- 
-                   </div>
+                   <!-- <p class="text-sm font-semibold text-slate-700">
+                       Manager
+                   </p> -->
+                   <p
+                       class="text-sm text-slate-500">
+                       <?= htmlspecialchars($note['ucenikIme']) ?>
+                   </p>
                    </div>
                </td>
                <td class="p-4 border-b border-slate-200">
@@ -244,18 +244,23 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
                    </p> -->
                    <p
                        class="text-sm text-slate-500">
-                       <?= htmlspecialchars($note['avtori']) ?>
+                       <?= htmlspecialchars($note['ucenikPrezime']) ?>
                    </p>
                    </div>
                </td>
                <td class="p-4 border-b border-slate-200">
                    <p class="text-sm text-slate-500">
-                   <?= htmlspecialchars($note['godina']) ?>
+                   <?= htmlspecialchars($note['ucenikEmail']) ?>
                    </p>
                </td>
                <td class="p-4 border-b border-slate-200">
                    <p class="text-sm text-slate-500">
-                   <?= htmlspecialchars($note['oddelenie']) ?> одд.
+                   <?= htmlspecialchars($note['odd_id']) ?> одд.
+                   </p>
+               </td>
+               <td class="p-4 border-b border-slate-200">
+                   <p class="text-sm text-slate-500">
+                   <?= htmlspecialchars($note['klasen']) ?>
                    </p>
                </td>
                <td class="p-4 border-b border-slate-200">
@@ -263,22 +268,21 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
                    <?php if ($note['stat'] === 0) : ?>
                    <div
                        class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
-                       <span class="">нова</span>
+                       <span class="">Активен</span>
                    </div>
                    <?php elseif ($note['stat'] === 1) : ?>
                     <div
                        class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-yellow-500/20">
-                       <span class="">зачувана</span>
+                       <span class="">Неактивен</span>
                    </div>
+                    <!-- <div
+                       class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-orange-500/20">
+                       <span class="">Критично</span>
+                   </div> -->
                    <?php elseif ($note['stat'] === 2) : ?>
                     <div
-                       class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-orange-500/20">
-                       <span class="">стара</span>
-                   </div>
-                   <?php elseif ($note['stat'] === 3) : ?>
-                    <div
                        class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-red-500/20">
-                       <span class="">оштетена</span>
+                       <span class="">Баниран</span>
                    </div>
                     <?php endif;?>
                    </div>
@@ -290,15 +294,14 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
                 <button style="font-size:24px" type="submit"><i class="material-icons">delete</i></button>
                </form>
 
-                   <a href="./kniga?id=<?= $note['id'] ?>" >
+                   <a href="./korisnik?id=<?= $note['id'] ?>" >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                     </svg>
                    </a>
-                   <div class="tooltip">                       
-                        &#9432;
-                             <span class="tooltiptext"><?= htmlspecialchars($note['objasnuvanje']) ?></span>
-                        </div>  
+                   <a href="./zadolzi?id=<?= $note['id'] ?>" >
+                   <i style="font-size:24px" class="fa">&#xf055;</i>
+                   </a>
                </td>
                </tr>
              
@@ -309,6 +312,8 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
 
 
        </div>
+
+
        <div class="flex items-center justify-between p-3">
            <p class="block text-sm text-slate-500">
            <?php
@@ -319,66 +324,106 @@ $number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
            </p>
            <div class="flex gap-1">    
            <?php    
-          
-if((int)($strana) == 1){
-        ?>
-            <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button">
-               Претходна
-           </button>
-        <?php
-            }else{
-                ?>
-           <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button" onclick="location.href='?strana=<?=((int)($strana-1))?>'">
-               Претходна
-           </button>
-           <?php
-            }
-        ?>
+                
            
-           <?php
-
-            for($i=1;$i<$number_of_pages+1;$i++){
-            ?>
-                <button
-                class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
-                onclick="location.href='?strana=<?=((int)($i))?>'">
-                    <?php
-                    if ($i == $strana) {
-                        echo "<b>".$i."</b>";
-                        
-                    } else {
-                        echo $i;
+                $total_pages = ceil($brkorisnici / $per_page);
+            
+                if($brkorisnici > $per_page){
+                              
+                    if((int)($strana) == 1){
+   
+                            }else{
+                                ?>
+                            <button
+                    class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    type="button" onclick="location.href='?strana=1'">
+                    Прва
+                </button>
+                        <button
+                            class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button" onclick="location.href='?strana=<?=((int)($strana-1))?>'">
+                            <
+                        </button>
+                        <?php
+                            }
+        
+            
+                    // Superset range of pages
+                    $superset_range = range(1, $total_pages);
+            
+                    // subset range of pages to display
+                    $subset_range = range($strana - 1, $strana + 1);
+            
+                    // adjust the range(if required)
+                    foreach($subset_range as $p){
+                        if($p < 1){
+                            array_shift($subset_range);
+                            if(in_array($subset_range[count($subset_range) - 1] + 1, $superset_range)){
+                                $subset_range[] = $subset_range[count($subset_range) - 1] + 1;
+                            }
+                        }elseif($p > $total_pages){
+                            array_pop($subset_range);
+                            if(in_array($subset_range[0] - 1, $superset_range)){
+                                array_unshift($subset_range, $subset_range[0] - 1);
+                            }
+                        }
                     }
-                    ?>
-               </button>
-            <?php
-            }    
-          
-if(($strana) == $number_of_pages){
-        ?>
-            <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button">
-               Следна
-           </button>
-        <?php
-            }else{
-                ?>
-           <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button" onclick="location.href='?strana=<?=((int)($strana+1))?>'">
-               Следна
-           </button>
-           <?php
-            }
+            
+                    // display intermediate pagination links
+                    if($subset_range[0] > $superset_range[0]){
+                        echo " ...&nbsp;";
+                    }
+                    foreach($subset_range as $p){
+                        ?>
+                        <button
+                        class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
+                        onclick="location.href='?strana=<?=((int)($p))?>'">
+                            <?php
+                            if ($p == $strana) {
+                                echo "<b>".$p."</b>";
+                                
+                            } else {
+                                echo $p;
+                            }
+                            ?>
+                       </button>
+                       <?php
+            
+                    }
+                    if($subset_range[count($subset_range) - 1] < $superset_range[count($superset_range) - 1]){
+                        echo "&nbsp;... ";
+                    }
+
+                    if(($strana) == $number_of_pages){
+
+                            }else{
+                                ?>
+                           <button
+                               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                               type="button" onclick="location.href='?strana=<?=((int)($strana+1))?>'">
+                               >
+                           </button>
+                           <button
+                               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                               type="button" onclick="location.href='?strana=<?=$total_pages?>'">
+                               Последна
+                           </button>
+                           <?php
+                            }
+                            ?>
+
+                           <?php
+                }    
+      
+
         ?>
 
            </div>
        </div>
+
+
+
+
        </div>
 </div>
 
