@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (! Validator::emptyPost('imeKniga') ){
-        $errors['imeKniga'] = 'Полето е задолжително.';
+        $errors['imeKniga'] = 'Полето е задолжително.';    
     }
     
     if (! Validator::emptyPost('objasnuvanje') ){
@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
+
     if (empty($errors)) {
         $db->query('UPDATE knigi SET imeKniga = :imeKniga, objasnuvanje = :objasnuvanje, slika = :slika, tiraz = :tiraz, kategorija = :kategorija, avtori = :avtori, izdavac = :izdavac, godina = :godina, oddelenie = :oddelenie, cena = :cena, stat = :stat WHERE id = '.$note['id'].'', [
             'imeKniga' => $_POST['imeKniga'],
@@ -78,4 +79,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-require "views/note.view.php";
+require "views/kniga.view.php";

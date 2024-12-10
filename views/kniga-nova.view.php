@@ -2,50 +2,60 @@
 <?php require('partials/nav.php') ?>
 <?php require('partials/banner.php') ?>
 
+<main>
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:views/note-create.view.php
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div class="md:grid md:grid-cols-3 md:gap-6">
 
         <p class="mb-6">
-            <a href="<?= realUrl('notes') ?>" class="text-blue-500 underline">Назад...</a>
-        </p>
+            <a href="<?= realUrl('knigi') ?>" class="text-blue-500 underline">назад...</a>
+        </p>    
+            <div class="mt-5 md:col-span-2 md:mt-0">
 
-
-<main>
-<div class="block md:flex md:justify-between md:text-left text-center mx-auto py-6 sm:px-6 lg:px-8">
-    <div class="order-2 md:order-1">
-        <?php require('partials/sidenav.php') ?>
-    </div>
-    <div class="order-1 md:order-2">
+========
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
+    
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="md:grid md:grid-cols-3 md:gap-6">
-            <!-- <div class="mt-5 md:col-span-2 md:mt-0"> -->
-
-                <?php if (isset($message['success'])) : ?> 
-                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-green-100 bg-green-700 border border-green-700 ">
-                        <div slot="avatar">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle w-5 h-5 mx-2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                            </svg>
-                        </div>
-                        <div class="text-xl font-normal  max-w-full flex-initial">
-                            <div class="py-2">Success!
-                                <div class="text-sm font-base"><?= $message['success'] ?></div>
-                            </div>
-                        </div>
-                        <div class="flex flex-auto flex-row-reverse">
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-green-400 rounded-full w-5 h-5 ml-2">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    <script>window.parent.location="<?= realUrl('note') ?>?id=<?= $note['id'] ?>"</script>
-                <?php endif; ?>
+  
+            <div class="mt-5 md:col-span-5 md:mt-0">
+            <p class="mb-2">
+            <a href="<?= realUrl('knigi') ?>" class="text-blue-500 underline"><< назад...</a>
+        </p> 
+<<<<<<< HEAD
+=======
+>>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/kniga-nova.view.php
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
+            <?php if (isset($message['success'])) : ?> 
+                <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-green-100 bg-green-700 border border-green-700 ">
+            <div slot="avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle w-5 h-5 mx-2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <div class="text-xl font-normal  max-w-full flex-initial">
+                <div class="py-2">Success!
+                    <div class="text-sm font-base"><?= $message['success'] ?></div>
+                </div>
+            </div>
+            <div class="flex flex-auto flex-row-reverse">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-green-400 rounded-full w-5 h-5 ml-2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+            </div>
+        </div>
+            <?php endif; ?>
 
                 <form method="POST" enctype="multipart/form-data">
                     <div class="shadow sm:overflow-hidden sm:rounded-md">
                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
-                            <div>
+                        <div>
                                 <label
                                     for="imeKniga"
                                     class="block text-sm font-medium text-gray-700"
@@ -55,7 +65,7 @@
                                         id="imeKniga"
                                         name="imeKniga"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        value="<?= htmlspecialchars($note['imeKniga']) ?>" >
+                                        value="<?= $_POST['imeKniga'] ?? '' ?>" >
 
                                     <?php if (isset($errors['imeKniga'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['imeKniga'] ?></p>
@@ -76,8 +86,8 @@
                                         name="objasnuvanje"
                                         rows="3"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        placeholder="Here's an idea for a note..."
-                                    ><?= htmlspecialchars($note['objasnuvanje']) ?></textarea>
+                                        placeholder="Внесете текст тука..."
+                                    ><?= $_POST['objasnuvanje'] ?? '' ?></textarea>
 
                                     <?php if (isset($errors['objasnuvanje'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['objasnuvanje'] ?></p>
@@ -93,9 +103,14 @@
                                     class="block text-sm font-medium text-gray-700"
                                 >Слика (урл)</label>
                                 <div class="mt-1">
-                                <img src="<?= htmlspecialchars($note['slika']) ?>" alt="тековна слика" width="240" height="320"> 
+                                    <!-- <input type="text"
+                                        id="slika"
+                                        name="slika"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        value="-->
+
                                         Select image to upload:
-                                    <input type="file" name="slika" id="slika">
+                                    <input type="file" name="slika" id="slika" >
 
                                     <?php if (isset($errors['slika'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['slika'] ?></p>
@@ -115,7 +130,7 @@
                                         id="avtori"
                                         name="avtori"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        value="<?= htmlspecialchars($note['avtori']) ?>" >
+                                        value="<?= $_POST['avtori'] ?? '' ?>" >
 
                                     <?php if (isset($errors['avtori'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['avtori'] ?></p>
@@ -129,13 +144,17 @@
                                 <label
                                     for="tiraz"
                                     class="block text-sm font-medium text-gray-700"
+<<<<<<< HEAD
                                 >Количина</label>
+=======
+                                >Тираж</label>
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                 <div class="mt-1">
                                     <input type="number" min="0"
                                         id="tiraz"
                                         name="tiraz"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        value="<?= htmlspecialchars($note['tiraz']) ?>" >
+                                        value="<?= $_POST['tiraz'] ?? '' ?>" >
 
                                     <?php if (isset($errors['tiraz'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['tiraz'] ?></p>
@@ -155,7 +174,7 @@
                                         id="izdavac"
                                         name="izdavac"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        value="<?= htmlspecialchars($note['izdavac']) ?>" >
+                                        value="<?= $_POST['izdavac'] ?? '' ?>" >
 
                                     <?php if (isset($errors['izdavac'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['izdavac'] ?></p>
@@ -178,10 +197,13 @@
                                         <option>Избери година</option>
                                         <?php foreach($years as $year) : ?>
                                             <?php 
-                                            if ($year === $note['godina']) {
+                                            if ($year === 2024) {
                                                 $extraop = "selected";
+<<<<<<< HEAD
+=======
                                             }else{
                                                 $extraop = "";
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                             }
                                             ?>
                                             <option value="<?php echo $year; ?>" <?php echo $extraop; ?>><?php echo $year; ?></option>
@@ -206,10 +228,10 @@
                                         name="kategorija"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option>Избери категорија</option>
-                                            <option value="0" <?= $note['kategorija'] === 0 ? 'selected' : '' ?>>Учебници</option>
-                                            <option value="1" <?= $note['kategorija'] === 1 ? 'selected' : '' ?>>Лектири</option>
-                                            <option value="2" <?= $note['kategorija'] === 2 ? 'selected' : '' ?>>Стручна литература</option>
-                                            <option value="3" <?= $note['kategorija'] === 3 ? 'selected' : '' ?>>Списанија</option>
+                                            <option value="0" selected>Учебници</option>
+                                            <option value="1">Лектири</option>
+                                            <option value="2">Стручна литература</option>
+                                            <option value="3">Списанија</option>
                                     </select>
                                     <?php if (isset($errors['stat'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['kategorija'] ?></p>
@@ -229,16 +251,16 @@
                                         name="oddelenie"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option>Избери одделение</option>
-                                            <option value="1" <?= $note['oddelenie'] === 1 ? 'selected' : '' ?>>Прво</option>
-                                            <option value="2" <?= $note['oddelenie'] === 2 ? 'selected' : '' ?>>Второ</option>
-                                            <option value="3" <?= $note['oddelenie'] === 3 ? 'selected' : '' ?>>Трето</option>
-                                            <option value="4" <?= $note['oddelenie'] === 4 ? 'selected' : '' ?>>Четврто</option>
-                                            <option value="5" <?= $note['oddelenie'] === 5 ? 'selected' : '' ?>>Петто</option>
-                                            <option value="6" <?= $note['oddelenie'] === 5 ? 'selected' : '' ?>>Шесто</option>
-                                            <option value="7" <?= $note['oddelenie'] === 6 ? 'selected' : '' ?>>Седмо</option>
-                                            <option value="8" <?= $note['oddelenie'] === 7 ? 'selected' : '' ?>>Осмо</option>
-                                            <option value="9" <?= $note['oddelenie'] === 8 ? 'selected' : '' ?>>Деветто</option>
-                                            <option value="0" <?= $note['oddelenie'] === 0 ? 'selected' : '' ?>>Нема</option>
+                                            <option value="1" selected>Прво</option>
+                                            <option value="2">Второ</option>
+                                            <option value="3">Трето</option>
+                                            <option value="4">Четврто</option>
+                                            <option value="5">Петто</option>
+                                            <option value="6">Шесто</option>
+                                            <option value="7">Седмо</option>
+                                            <option value="8">Осмо</option>
+                                            <option value="9">Деветто</option>
+                                            <option value="0">Нема</option>
                                     </select>
                                     <?php if (isset($errors['oddelenie'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['oddelenie'] ?></p>
@@ -258,7 +280,7 @@
                                         id="cena"
                                         name="cena"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        value="<?= htmlspecialchars($note['cena']) ?>" >
+                                        value="0" >
 
                                     <?php if (isset($errors['cena'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['cena'] ?></p>
@@ -278,12 +300,20 @@
                                         name="stat"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option>Избери статус</option>
+<<<<<<< HEAD
                                         <?php foreach($years as $year) : ?>
-                                            <option value="0" <?= $note['stat'] === 0 ? 'selected' : '' ?>>Нова</option>
-                                            <option value="1" <?= $note['stat'] === 1 ? 'selected' : '' ?>>Зачувана</option>
-                                            <option value="2" <?= $note['stat'] === 2 ? 'selected' : '' ?>>Стара</option>
-                                            <option value="3" <?= $note['stat'] === 3 ? 'selected' : '' ?>>Оштетена/и</option>
+=======
+                                        
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
+                                            <option value="0" selected>Нова</option>
+                                            <option value="1">Зачувана</option>
+                                            <option value="2">Стара</option>
+                                            <option value="3">Оштетена/и</option>
+<<<<<<< HEAD
                                         <?php endforeach; ?>
+=======
+                                        
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                     </select>
                                     <?php if (isset($errors['stat'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['stat'] ?></p>
@@ -293,6 +323,29 @@
                                     <?php endif; ?>
                                 </div>
                             </div>
+<<<<<<< HEAD
+=======
+                            <div>
+                                <label
+                                    for="cena"
+                                    class="block text-sm font-medium text-gray-700"
+                                >Количина</label>
+                                <div class="mt-1">
+                                    <input type="number" min="0"
+                                        id="kolicina"
+                                        name="kolicina"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        value="1" >
+
+                                    <?php if (isset($errors['cena'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['cena'] ?></p>
+                                    <?php endif; ?>
+                                    <?php if (isset($errors['empty'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['empty'] ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                         </div>
 
                         <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
@@ -300,17 +353,14 @@
                                 type="submit"
                                 class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
-                                Зачувај
+                                Додади
                             </button>
                         </div>
                     </div>
                 </form>
-            <!-- </div> -->
+            </div>
         </div>
     </div>
-</div>
 </main>
-
-
 
 <?php require('partials/footer.php') ?>
