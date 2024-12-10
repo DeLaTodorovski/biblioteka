@@ -20,9 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (! Validator::string($_POST['ucenikIme'], 1, 225)) {
         $errors['ucenikIme'] = 'A body of no more than 225 characters is required.';
     }
-    if (! Validator::string($_POST['zabeleska'], 1, 1000)) {
-        $errors['objasnuvanje'] = 'A body of no more than 1000 characters is required.';
-    }
 
     if (! Validator::emptyPost('ucenikIme') ){
         $errors['imeKniga'] = 'Полето е задолжително.';
@@ -31,12 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (! Validator::emptyPost('ucenikPrezime') ){
         $errors['objasnuvanje'] = 'Полето е задолжително.';
     }
-    if (! Validator::emptyPost('ucenikEmail') ){
-        $errors['ucenikEmail'] = 'Полето е задолжително.';
-    }
-    if (! Validator::emptyPost('klasen') ){
-        $errors['klasen'] = 'Полето е задолжително.';
-    }
+    // if (! Validator::emptyPost('ucenikEmail') ){
+    //     $errors['ucenikEmail'] = 'Полето е задолжително.';
+    // }
+    // if (! Validator::emptyPost('klasen') ){
+    //     $errors['klasen'] = 'Полето е задолжително.';
+    // }
 
 
 

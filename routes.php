@@ -9,5 +9,6 @@ return [
     '/korisnici' => 'controllers/korisnici.php',
     '/korisnik' => 'controllers/korisnik.php',
     '/korisnik/nov' => 'controllers/korisnik-nov.php',
+    '/zadolzi' => 'controllers/zadolzi.php',
     '/contact' => 'controllers/contact.php',
 ];

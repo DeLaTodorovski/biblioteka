@@ -11,7 +11,7 @@
 
             <div class="mt-5 md:col-span-5 md:mt-0">
             <p class="mb-2">
-            <a href="<?= realUrl('knigi') ?>" class="text-blue-500 underline"><< назад...</a>
+            <a href="<?= realUrl('korisnici') ?>" class="text-blue-500 underline"><< назад...</a>
         </p>
 
             <?php if (isset($message['success'])) : ?> 
