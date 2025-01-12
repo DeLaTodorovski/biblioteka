@@ -1,4 +1,5 @@
-<?php require('partials/head.php') ?>
+<?php
+require('partials/head.php') ?>
 <?php require('partials/nav.php') ?>
 <?php require('partials/banner.php') ?>
 
@@ -22,7 +23,7 @@
                 </svg>
             </div>
             <div class="text-xl font-normal  max-w-full flex-initial">
-                <div class="py-2">Success!
+                <div class="py-2">Успешно!
                     <div class="text-sm font-base"><?= $message['success'] ?></div>
                 </div>
             </div>
@@ -36,6 +37,37 @@
             </div>
         </div>
             <?php endif; ?>
+                <?php if (isset($message['errors'])) : ?>
+                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-red-100 bg-red-700 border border-red-700 ">
+                        <div slot="avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle w-5 h-5 mx-2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="text-xl font-normal  max-w-full flex-initial">
+                            <div class="py-2">Грешка!
+                                <div class="text-sm font-base">
+                                    <?php
+
+                                    foreach ($message['errors'] as $error){
+                                        echo $error;
+                                    }
+
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-auto flex-row-reverse">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-green-400 rounded-full w-5 h-5 ml-2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
                 <form method="POST" enctype="multipart/form-data">
                     <div class="shadow sm:overflow-hidden sm:rounded-md">
                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
@@ -45,11 +77,12 @@
                                     class="block text-sm font-medium text-gray-700"
                                 >Наслов</label>
                                 <div class="mt-1">
+                                    <input type="hidden" value="<?= htmlspecialchars($note['id'])?>" name="id">
                                     <input type="text"
                                         id="imeKniga"
                                         name="imeKniga"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        value="<?= htmlspecialchars($note['imeKniga']) ?>" >
+                                        value="<?=htmlspecialchars($note['imeKniga'])?>" >
 
                                     <?php if (isset($errors['imeKniga'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['imeKniga'] ?></p>
@@ -165,7 +198,7 @@
                                     class="block text-sm font-medium text-gray-700"
                                 >Година</label>
                                 <div class="mt-1">
-                                <?php $years = range(2004, strftime("%Y", time())); ?>
+                                <?php $years = range(2004, date("Y", time())); ?>
                                     <select id="godina"
                                         name="godina"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
@@ -272,12 +305,11 @@
                                         name="stat"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option>Избери статус</option>
-                                        <?php foreach($years as $year) : ?>
+
                                             <option value="0" <?= $note['stat'] === 0 ? 'selected' : '' ?>>Нова</option>
                                             <option value="1" <?= $note['stat'] === 1 ? 'selected' : '' ?>>Зачувана</option>
                                             <option value="2" <?= $note['stat'] === 2 ? 'selected' : '' ?>>Стара</option>
                                             <option value="3" <?= $note['stat'] === 3 ? 'selected' : '' ?>>Оштетена/и</option>
-                                        <?php endforeach; ?>
                                     </select>
                                     <?php if (isset($errors['stat'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['stat'] ?></p>

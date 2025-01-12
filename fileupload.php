@@ -1,9 +1,9 @@
 <?php
 
-
+$error = "";
 
 $target_dir = "./views/resourses/images/";
-
+$compressedImage = '';
 
 // Check if image file is a actual image or fake image
 if(isset($_FILES["slika"])) {
@@ -12,7 +12,7 @@ if(isset($_FILES["slika"])) {
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     $check = getimagesize($_FILES["slika"]["tmp_name"]);
     if($check !== false) {
-    //  echo "File is an image - " . $check["mime"] . ".";
+       // echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
     } else {
     //   echo "File is not an image.";
@@ -24,7 +24,7 @@ if(isset($_FILES["slika"])) {
 
     // Check if file already exists
     if (file_exists($target_file)) {
-        //$error = "File already exists.";
+        $error = "File already exists.";
         $compressedImage = $target_file;
         $uploadOk = 1;
     }

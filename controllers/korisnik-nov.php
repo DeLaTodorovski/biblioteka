@@ -4,28 +4,29 @@ require 'Validator.php';
 $config = require 'config.php';
 $db = new Database($config['database']);
 
-$heading = 'Додади корисник';
+$heading = 'Додади ученик';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
 
-    if (! Validator::string($_POST['ucenikIme'], 1, 225)) {
-        $errors['ucenikIme'] = 'A body of no more than 225 characters is required.';
+    if (! Validator::string($_POST['ucenikIme'], 1, 20)) {
+        $errors['ucenikIme'] = 'Не треба да содржи помалку од 1 и повеќе од 20 карактери.<br>';
     }
 
     if (! Validator::emptyPost('ucenikIme') ){
-        $errors['ucenikIme'] = 'Полето е задолжително.';
+        $errors['ucenikIme'] = 'Полето Име е задолжително.<br>';
     }
     
     if (! Validator::emptyPost('ucenikPrezime') ){
-        $errors['ucenikPrezime'] = 'Полето е задолжително.';
+        $errors['ucenikPrezime'] = 'Полето Презиме е задолжително.<br>';
     }
 
 
 
 
     if (empty($errors)) {
-        $db->query('INSERT INTO ucenici(ucenikIme, ucenikPrezime, ucenikEmail, odd_id, klasen, stat, zabeleska) VALUES(:ucenikIme, :ucenikPrezime, :ucenikEmail, :odd_id, :klasen, :stat, :zabeleska)', [
+        $db->query('INSERT INTO ucenici(bid, ucenikIme, ucenikPrezime, ucenikEmail, odd_id, klasen, stat, zabeleska) VALUES(:bid,:ucenikIme, :ucenikPrezime, :ucenikEmail, :odd_id, :klasen, :stat, :zabeleska)', [
+            'bid' => $_POST['bid'],
             'ucenikIme' => $_POST['ucenikIme'],
             'ucenikPrezime' => $_POST['ucenikPrezime'],
             'ucenikEmail' => $_POST['ucenikEmail'],
@@ -35,6 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'zabeleska' => $_POST['zabeleska']
         ]);
             $message['success'] = 'Успешно внесен ученик со име ' .$_POST['ucenikIme'];
+//            header('Refresh: 1; URL='.$_SERVER['REQUEST_URI'].'&status=success');
+    }else{
+        $message['errors'] = $errors;
     }
 }
 

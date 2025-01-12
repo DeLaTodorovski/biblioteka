@@ -1,11 +1,12 @@
-<?php require('partials/head.php') ?>
+<?php
+require('partials/head.php') ?>
 <?php require('partials/nav.php') ?>
 <?php require('partials/banner.php') ?>
 
 <script type="text/javascript">
 function getStates(value){
     let zborce =  document.getElementById('search_text').value;
-  $.post("controllers/povrzi.php?baraj=imeKniga&tabla=knigi&kade=imeKniga&zbor="+zborce, {partialState:value}, function(data){
+  $.post("controllers/povrziZadolzi.php?baraj=kniga_id&tabla=knigi&kade=imeKniga&zbor="+zborce, {partialState:value}, function(data){
     $("#results").html(data);
   });
 }
@@ -51,13 +52,37 @@ function getStates(value){
                 <form method="POST" enctype="multipart/form-data">
                     <div class="shadow sm:overflow-hidden sm:rounded-md">
                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
-                        
-                        
-                        
-                        <input type='hidden' name='ucenikIme' value='<?= $note['ucenikIme'] ?>'>
-                        <input type='hidden' name='ucenik_id' value='<?= $note['id'] ?>'>
-                        <?= htmlspecialchars($note['ucenikIme']) ?> <?= htmlspecialchars($note['ucenikPrezime']) ?><br>
-
+                            <div>
+                                    <label
+                                        for="imeKniga"
+                                        class="block text-sm font-medium text-gray-700"
+                                    >Име и презиме:</label>
+                                    <div class="mt-1">
+                                        <?= htmlspecialchars($note['ucenikIme']) ?> <?= htmlspecialchars($note['ucenikPrezime']) ?>
+                                        <input type='hidden' name='ucenikIme' value='<?= $note['ucenikIme'] ?>'>
+                                        <input type='hidden' name='ucenik_id' value='<?= $note['id'] ?>'>
+                                    </div>
+                            </div>
+                            <div>
+                                <label
+                                    for="imeKniga"
+                                    class="block text-sm font-medium text-gray-700"
+                                >Одделение:</label>
+                                <div class="mt-1">
+                                <?= htmlspecialchars($note['odd_id']) ?> одд.
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    for="imeKniga"
+                                    class="block text-sm font-medium text-gray-700"
+                                >Класен раководител:</label>
+                                <div class="mt-1">
+                                <?= htmlspecialchars($note['klasen']) ?>
+                                </div>
+                            </div>
+                            <label for="dase_vrati">Датум за враќање:</label>
+                            <input type="date" id="dase_vrati" name="dase_vrati" value="<?= date('Y-m-d', strtotime('+30 days')) ?>">
                             <div class="w-max">
                                 <b>Статус: </b>
                                 <?php
@@ -80,12 +105,117 @@ function getStates(value){
                                 ?>
                             </div>
 
-                            <div class="w-max">
-                            <b>Книга: </b>
-                                <input type="text" id="search_text" onkeyup="getStates(this.value)">
-                                <br>
-                                <div id="results"></div>
-                            </div>
+
+                                <b>Книга: </b>
+                                    <input type="text" id="search_text" onkeyup="getStates(this.value)">
+                                <div class="p-0">
+                                        <table class="w-full mt-4 text-left table-auto ">
+                                            <thead>
+                                            <tr>
+                                                <th
+                                                        class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                                                    <p
+                                                            class="flex items-center justify-between gap-2 font-sans text-sm font-normal leading-none text-slate-500">
+                                                        ID
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                                             stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                                                        </svg>
+                                                    </p>
+                                                </th>
+                                                <th
+                                                        class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                                                    <p
+                                                            class="flex items-center justify-between gap-2 font-sans text-sm font-normal leading-none text-slate-500">
+                                                        Наслов
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                                             stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                                                        </svg>
+                                                    </p>
+                                                </th>
+                                                <th
+                                                        class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                                                    <p
+                                                            class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
+                                                        Автори
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                                             stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                                                        </svg>
+                                                    </p>
+                                                </th>
+                                                <th
+                                                        class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                                                    <p
+                                                            class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
+                                                        Категорија
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                                             stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                                                        </svg>
+                                                    </p>
+                                                </th>
+                                                <th
+                                                        class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                                                    <p
+                                                            class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
+                                                        Година
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                                             stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                                                        </svg>
+                                                    </p>
+                                                </th>
+                                                <th
+                                                        class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                                                    <p
+                                                            class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
+                                                        Одделение
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                                             stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                                                        </svg>
+                                                    </p>
+                                                </th>
+                                                <th
+                                                        class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                                                    <p
+                                                            class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
+                                                        Статус
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                                             stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                                                        </svg>
+                                                    </p>
+                                                </th>
+
+                                                <th
+                                                        class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                                                    <p
+                                                            class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">Опции
+                                                    </p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="results">
+                                        <?php if (isset($errors['greska'])) : ?>
+                                        <tr><td> <p class="text-red-500 text-xs mt-2"><?= $errors['greska'] ?></p><td></tr>
+                                        <?php endif; ?>
+                                        <?php if (isset($errors['imaKniga'])) : ?>
+                                            <tr><td> <p class="text-red-500 text-xs mt-2"><?= $errors['imaKniga'] ?></p><td></tr>
+                                        <?php endif; ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
 
                         </div>
 

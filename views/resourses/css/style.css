@@ -30,12 +30,17 @@
       
       .zoom:hover {
         transform: scale(5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-<<<<<<< HEAD
-=======
       }
       
       a:hover {
         cursor: pointer;
         background-color: yellow;
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
       }
+
+      td {
+        word-wrap: break-word;
+    }
+
+input[type="file"]{
+    color: red;
+}
