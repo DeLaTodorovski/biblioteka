@@ -6,7 +6,7 @@ class Validator
     {
         $value = trim($value);
 
-        return strlen($value) >= $min && strlen($value) <= $max;
+        return mb_strlen($value) >= $min && strlen($value) <= $max;
     }
 
     public static function emptyPost($value)
@@ -14,6 +14,10 @@ class Validator
             return !empty($_POST[$value]);
     }
 
+    public static function emptyFiles($value)
+    {
+        return !empty($_FILES[$value]);
+    }
 
     public static function email($value)
     {

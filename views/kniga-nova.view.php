@@ -3,19 +3,6 @@
 <?php require('partials/banner.php') ?>
 
 <main>
-<<<<<<< HEAD
-=======
-<<<<<<<< HEAD:views/note-create.view.php
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-
-        <p class="mb-6">
-            <a href="<?= realUrl('knigi') ?>" class="text-blue-500 underline">назад...</a>
-        </p>    
-            <div class="mt-5 md:col-span-2 md:mt-0">
-
-========
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
     
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -23,34 +10,61 @@
             <div class="mt-5 md:col-span-5 md:mt-0">
             <p class="mb-2">
             <a href="<?= realUrl('knigi') ?>" class="text-blue-500 underline"><< назад...</a>
-        </p> 
-<<<<<<< HEAD
-=======
->>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/kniga-nova.view.php
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
-            <?php if (isset($message['success'])) : ?> 
-                <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-green-100 bg-green-700 border border-green-700 ">
-            <div slot="avatar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle w-5 h-5 mx-2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-            </div>
-            <div class="text-xl font-normal  max-w-full flex-initial">
-                <div class="py-2">Success!
-                    <div class="text-sm font-base"><?= $message['success'] ?></div>
-                </div>
-            </div>
-            <div class="flex flex-auto flex-row-reverse">
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-green-400 rounded-full w-5 h-5 ml-2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </div>
-            </div>
-        </div>
-            <?php endif; ?>
+        </p>
+                <?php if (isset($message['success'])) : ?>
+                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-green-100 bg-green-700 border border-green-700 ">
+                        <div slot="avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle w-5 h-5 mx-2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="text-xl font-normal  max-w-full flex-initial">
+                            <div class="py-2">Успешно!
+                                <div class="text-sm font-base"><?= $message['success'] ?></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-auto flex-row-reverse">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-green-400 rounded-full w-5 h-5 ml-2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if (isset($message['errors'])) : ?>
+                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-red-100 bg-red-700 border border-red-700 ">
+                        <div slot="avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle w-5 h-5 mx-2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="text-xl font-normal  max-w-full flex-initial">
+                            <div class="py-2">Грешка!
+                                <div class="text-sm font-base">
+                                    <?php
+
+                                    foreach ($message['errors'] as $error){
+                                        echo $error;
+                                    }
+
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-auto flex-row-reverse">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-green-400 rounded-full w-5 h-5 ml-2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
                 <form method="POST" enctype="multipart/form-data">
                     <div class="shadow sm:overflow-hidden sm:rounded-md">
@@ -70,8 +84,8 @@
                                     <?php if (isset($errors['imeKniga'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['imeKniga'] ?></p>
                                     <?php endif; ?>
-                                    <?php if (isset($errors['empty'])) : ?>
-                                        <p class="text-red-500 text-xs mt-2"><?= $errors['empty'] ?></p>
+                                    <?php if (isset($errors['imaKniga'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['imaKniga'] ?></p>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -109,7 +123,7 @@
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         value="-->
 
-                                        Select image to upload:
+                                        Одбери слика:
                                     <input type="file" name="slika" id="slika" >
 
                                     <?php if (isset($errors['slika'])) : ?>
@@ -144,11 +158,7 @@
                                 <label
                                     for="tiraz"
                                     class="block text-sm font-medium text-gray-700"
-<<<<<<< HEAD
-                                >Количина</label>
-=======
                                 >Тираж</label>
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                 <div class="mt-1">
                                     <input type="number" min="0"
                                         id="tiraz"
@@ -190,7 +200,7 @@
                                     class="block text-sm font-medium text-gray-700"
                                 >Година</label>
                                 <div class="mt-1">
-                                <?php $years = range(2004, strftime("%Y", time())); ?>
+                                <?php $years = range(2004, date("Y", time())); ?>
                                     <select id="godina"
                                         name="godina"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
@@ -199,11 +209,8 @@
                                             <?php 
                                             if ($year === 2024) {
                                                 $extraop = "selected";
-<<<<<<< HEAD
-=======
                                             }else{
                                                 $extraop = "";
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                             }
                                             ?>
                                             <option value="<?php echo $year; ?>" <?php echo $extraop; ?>><?php echo $year; ?></option>
@@ -300,20 +307,12 @@
                                         name="stat"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option>Избери статус</option>
-<<<<<<< HEAD
-                                        <?php foreach($years as $year) : ?>
-=======
                                         
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                             <option value="0" selected>Нова</option>
                                             <option value="1">Зачувана</option>
                                             <option value="2">Стара</option>
                                             <option value="3">Оштетена/и</option>
-<<<<<<< HEAD
-                                        <?php endforeach; ?>
-=======
                                         
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                                     </select>
                                     <?php if (isset($errors['stat'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['stat'] ?></p>
@@ -323,8 +322,6 @@
                                     <?php endif; ?>
                                 </div>
                             </div>
-<<<<<<< HEAD
-=======
                             <div>
                                 <label
                                     for="cena"
@@ -337,15 +334,14 @@
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         value="1" >
 
-                                    <?php if (isset($errors['cena'])) : ?>
-                                        <p class="text-red-500 text-xs mt-2"><?= $errors['cena'] ?></p>
+                                    <?php if (isset($errors['kolicina'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['kolicina'] ?></p>
                                     <?php endif; ?>
                                     <?php if (isset($errors['empty'])) : ?>
                                         <p class="text-red-500 text-xs mt-2"><?= $errors['empty'] ?></p>
                                     <?php endif; ?>
                                 </div>
                             </div>
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                         </div>
 
                         <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">

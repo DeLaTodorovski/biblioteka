@@ -8,53 +8,11 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
 <?php require('partials/head.php') ?>
 <?php require('partials/nav.php') ?>
 <?php require('partials/banner.php') ?>
-<<<<<<< HEAD
+<?php
+$strana = isset($_GET['strana'])?$_GET['strana']:0;
+$total_pages = ceil($brknigi / $per_page);
+?>
 
-=======
-<style>
-    .tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: default;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  padding: 0.25em 0.5em;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 0.25em;
-  white-space: nowrap;
-
-  
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-  top: 100%;
-  left: 100%;
-  transition-property: visibility;
-  transition-delay: 0s;
-
-}
-
-.tooltip:hover .tooltiptext {
-
-  visibility: visible;
-  transition-delay: 0.3s;
-  min-width:500px; /* I have changed here */
-    max-width:500px;
-}
-
-.zoom {
-  transition: transform .2s; /* Animation */
-}
-
-.zoom:hover {
-  transform: scale(5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-}
-</style>
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
 <main>
     <!-- <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
        
@@ -99,20 +57,29 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    <p class="text-slate-500">Сите книги внесени во базата</p>
                </div>
            <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
-               <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button">
-               Види ги сите
-               </button>
-<<<<<<< HEAD
+               <label
+                       for="odd_id"
+                       class="block text-sm font-medium text-gray-700"
+               >Прикажи:</label>
+               <select id="prikazi"
+                       name="prikazi"
+                       class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                       onchange="if (this.value) window.location.href=this.value">
+                   <option value="?podredi=<?=$order?>&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=5" <?= $per_page == 5 ? 'selected' : '' ?>>5</option>
+                   <option value="?podredi=<?=$order?>&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=10" <?= $per_page == 10 ? 'selected' : '' ?>>10</option>
+                   <option value="?podredi=<?=$order?>&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=25" <?= $per_page == 25 ? 'selected' : '' ?>>25</option>
+                   <option value="?podredi=<?=$order?>&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=50" <?= $per_page == 50 ? 'selected' : '' ?>>50</option>
+                   <option value="?podredi=<?=$order?>&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=100" <?= $per_page == 100 ? 'selected' : '' ?>>100</option>
+               </select>
+               <form method="post"  enctype="multipart/form-data">
+                   <input type="search" name="baranje" id="baranje" >
+                   <button
+                           class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                           type="submit">
+                       Барај
+                   </button>
+               </form>
                <a href="<?= realUrl('kniga/nova') ?>"
-=======
-<<<<<<<< HEAD:views/notes.view.php
-               <a href="<?= realUrl('knigi/nova') ?>"
-========
-               <a href="<?= realUrl('kniga/nova') ?>"
->>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
                class="flex select-none items-center gap-2 rounded bg-slate-800 py-2.5 px-4 text-xs font-semibold text-white shadow-md shadow-slate-900/10 transition-all hover:shadow-lg hover:shadow-slate-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                type="button">
                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
@@ -127,12 +94,12 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
            </div>
        
        </div>
-       <div class="p-0 overflow-scroll">
+       <div class="p-0">
            <table class="w-full mt-4 text-left table-auto min-w-max">
            <thead>
                <tr>
                <th
-                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100" onclick="parent.location='?podredi=id&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=<?=$per_page?>'">
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm font-normal leading-none text-slate-500">
                    ID
@@ -144,7 +111,8 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    </p>
                </th>
                <th
-                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100"
+                   onclick="parent.location='?podredi=imeKniga&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=<?=$per_page?>'">
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm font-normal leading-none text-slate-500">
                    Наслов
@@ -156,7 +124,8 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    </p>
                </th>
                <th
-                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100"
+                   onclick="parent.location='?podredi=avtori&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=<?=$per_page?>'">
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
                    Автори
@@ -168,7 +137,7 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    </p>
                </th>
                <th
-                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100" onclick="parent.location='?podredi=kategorija&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=<?=$per_page?>'">
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
                    Категорија
@@ -180,9 +149,9 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    </p>
                </th>
                <th
-                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100" onclick="parent.location='?podredi=godina&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=<?=$per_page?>'">
                    <p
-                   class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
+                   class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500" >
                    Година
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                        stroke="currentColor" aria-hidden="true" class="w-4 h-4">
@@ -191,8 +160,9 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    </svg>
                    </p>
                </th>
+
                <th
-                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100" onclick="parent.location='?podredi=oddelenie&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=<?=$per_page?>'">
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
                    Одделение
@@ -204,7 +174,7 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                    </p>
                </th>
                <th
-                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100">
+                   class="p-4 transition-colors cursor-pointer border-y border-slate-200 bg-slate-50 hover:bg-slate-100" onclick="parent.location='?podredi=stat&sort=<?= $sort ?>&strana=<?= $_GET['strana']?>&prikazi=<?=$per_page?>'">
                    <p
                    class="flex items-center justify-between gap-2 font-sans text-sm  font-normal leading-none text-slate-500">
                    Статус
@@ -224,33 +194,34 @@ if (empty($_GET['strana']) || !(int)$_GET['strana'])
                </th>
                </tr>
            </thead>
-<?php
-<<<<<<< HEAD
-=======
-<<<<<<<< HEAD:views/notes.view.php
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
-$nb_elem_per_page = 2;
-$page = isset($_GET['strana'])?intval($_GET['strana']-1):0;
-$number_of_pages = intval(count($notes)/$nb_elem_per_page)+1;
-?>
            <tbody>
-         <?php foreach (array_slice($notes, $page*$nb_elem_per_page, $nb_elem_per_page) as $note) : ?>
-<<<<<<< HEAD
-=======
-========
+<?php
 
 $page = isset($_GET['strana'])?intval($_GET['strana']-1):0;
 $number_of_pages = intval(count($notes)/$per_page)+1;
-?>
-           <tbody>
-         <?php foreach (array_slice($notes, $page*$per_page, $per_page) as $note) : ?>
->>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
+
+         if($brknigi > 0){
+
+             if(isset($_POST['baranje']) && !empty($_POST['baranje'])) {
+                 $looping =  $notes;
+             }else{
+                 $looping =  array_slice($notes, $page*$per_page, $per_page);
+             }
+
+         foreach ( $looping  as $note) : ?>
+
+
                <tr>
                <td class="p-4 border-b border-slate-200">
                    <div class="flex flex-col">
                    <p class="text-sm font-semibold text-slate-700">
-                   <?= $note['id'] ?>
+                       <?php
+                       if(isset($_POST['baranje']) && !empty($_POST['baranje'])) {
+                           echo strong_words($note['id'],[$_POST['baranje']]);
+                       }else{
+                           echo '<input type="text" size="5" style="width: 50px;" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" onclick="this.select(); document.execCommand(\'Copy\');" value="' . htmlspecialchars($note['id']) . '">';
+                       }
+                       ?>
                    </p>
                    </div>
                </td>
@@ -269,16 +240,16 @@ $number_of_pages = intval(count($notes)/$per_page)+1;
                        <p class="text-sm font-semibold text-slate-700">
                           
                           <a href="./kniga?id=<?= $note['id'] ?>"  class="text-blue-500 hover:underline">
-<<<<<<< HEAD
-                          <?= htmlspecialchars($note['imeKniga']) ?> </a>
-=======
-<<<<<<<< HEAD:views/notes.view.php
-                          <?= htmlspecialchars($note['imeKniga']) ?>
-                    </a>
-========
-                          <?= htmlspecialchars($note['imeKniga']) ?> </a>
->>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
+
+                          <?php
+                          if(isset($_POST['baranje']) && !empty($_POST['baranje'])) {
+                              echo strong_words($note['imeKniga'],[$_POST['baranje']]);
+                          }else{
+                              echo  htmlspecialchars($note['imeKniga']);
+                          }
+                          ?>
+
+                          </a>
                         </p>
 
                    </div>
@@ -288,7 +259,7 @@ $number_of_pages = intval(count($notes)/$per_page)+1;
                         </div>  
                    </div>
                </td>
-               <td class="p-4 border-b border-slate-200">
+               <td class="p-4 border-b border-slate-200" style="width:150px">
                    <div class="flex flex-col">
                    <!-- <p class="text-sm font-semibold text-slate-700">
                        Manager
@@ -319,57 +290,58 @@ $number_of_pages = intval(count($notes)/$per_page)+1;
                </td>
                <td class="p-4 border-b border-slate-200">
                    <div class="w-max">
-                   <?php if ($note['stat'] === 0) : ?>
-                   <div
-                       class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
-                       <span class="">нова</span>
-                   </div>
-                   <?php elseif ($note['stat'] === 1) : ?>
-                    <div
-                       class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-yellow-500/20">
-                       <span class="">зачувана</span>
-                   </div>
-                   <?php elseif ($note['stat'] === 2) : ?>
-                    <div
-                       class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-orange-500/20">
-                       <span class="">стара</span>
-                   </div>
-                   <?php elseif ($note['stat'] === 3) : ?>
-                    <div
-                       class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-red-500/20">
-                       <span class="">оштетена</span>
-                   </div>
-                    <?php endif;?>
+                   <?= statusKniga($note['stat']) ?>
                    </div>
                </td>
 
                <td class="p-4 border-b border-slate-200">
-               <form method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="pid" id="pid" value="<?= $note['id'] ?>" >
-                <button style="font-size:24px" type="submit"><i class="material-icons">delete</i></button>
-               </form>
 
-                   <a href="./kniga?id=<?= $note['id'] ?>" >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                    </svg>
-                   </a>
-<<<<<<< HEAD
-                 
-=======
-<<<<<<<< HEAD:views/notes.view.php
-                   <div class="tooltip">                       
-                        &#9432;
-                             <span class="tooltiptext"><?= htmlspecialchars($note['objasnuvanje']) ?></span>
-                        </div>  
-========
-                 
->>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
+                   <!-- Dropdown Component -->
+                   <div class="relative" x-data="{ open: false }">
+                       <button @click="open = !open" class="rounded bg-white px-4 py-2 text-gray-700 shadow-md" >
+                           <!--                           <svg class="w-6 h-6 text-gray-800 light:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">-->
+                           <!--                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z"/>-->
+                           <!--                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>-->
+                           <!--                           </svg>-->
+                           <svg class="w-6 h-6 text-gray-800 light:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                               <path fill-rule="evenodd" d="M9.586 2.586A2 2 0 0 1 11 2h2a2 2 0 0 1 2 2v.089l.473.196.063-.063a2.002 2.002 0 0 1 2.828 0l1.414 1.414a2 2 0 0 1 0 2.827l-.063.064.196.473H20a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-.089l-.196.473.063.063a2.002 2.002 0 0 1 0 2.828l-1.414 1.414a2 2 0 0 1-2.828 0l-.063-.063-.473.196V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-.089l-.473-.196-.063.063a2.002 2.002 0 0 1-2.828 0l-1.414-1.414a2 2 0 0 1 0-2.827l.063-.064L4.089 15H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h.09l.195-.473-.063-.063a2 2 0 0 1 0-2.828l1.414-1.414a2 2 0 0 1 2.827 0l.064.063L9 4.089V4a2 2 0 0 1 .586-1.414ZM8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clip-rule="evenodd"/>
+                           </svg>
+                       </button>
+                       <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-15 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-0 z-10">
+                           <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                               <a href="./kniga?id=<?= $note['id'] ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                   <svg class="w-6 h-6 text-gray-800 light:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                       <path fill-rule="evenodd" d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z" clip-rule="evenodd"/>
+                                       <path fill-rule="evenodd" d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z" clip-rule="evenodd"/>
+                                   </svg>
+                               </a>
+                               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                                   <form method="POST" enctype="multipart/form-data">
+                                       <input type="hidden" name="pid" id="pid" value="<?= $note['id'] ?>" >
+                                       <button type="submit" name="izbrisi">
+                                           <svg onclick="return confirm('Дали сте сигурни?');"   class="w-6 h-6 text-gray-800 light:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                               <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+                                           </svg>
+                                       </button>
+                                   </form>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
                </td>
                </tr>
              
         <?php endforeach; ?>
+
+      <?php
+        }else{
+             echo "<tr><td class='p-4 border-b border-slate-200'>Нема резултат</td></tr>";
+         }
+
+if($strana > $total_pages){
+    echo "<tr><td class='p-4 border-b border-slate-200'>Нема резултат</td></tr>";
+}
+      ?>
            </tbody>
            </table>
 
@@ -379,94 +351,34 @@ $number_of_pages = intval(count($notes)/$per_page)+1;
        <div class="flex items-center justify-between p-3">
            <p class="block text-sm text-slate-500">
            <?php
-                $strana = isset($_GET['strana'])?$_GET['strana']:0;
                 echo "Страна ".$strana. " од ".$number_of_pages ;
             ?>
           
            </p>
            <div class="flex gap-1">    
            <?php    
-<<<<<<< HEAD
-=======
-<<<<<<<< HEAD:views/notes.view.php
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
-          
-if((int)($strana) == 1){
-        ?>
-            <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button">
-               Претходна
-           </button>
-        <?php
-            }else{
-                ?>
-           <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button" onclick="location.href='?strana=<?=((int)($strana-1))?>'">
-               Претходна
-           </button>
-           <?php
-            }
-        ?>
-           
-           <?php
-
-            for($i=1;$i<$number_of_pages+1;$i++){
-            ?>
-                <button
-                class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
-                onclick="location.href='?strana=<?=((int)($i))?>'">
-                    <?php
-                    if ($i == $strana) {
-                        echo "<b>".$i."</b>";
-                        
-                    } else {
-                        echo $i;
-                    }
-                    ?>
-               </button>
-            <?php
-            }    
-          
-if(($strana) == $number_of_pages){
-        ?>
-            <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button">
-               Следна
-           </button>
-        <?php
-            }else{
-                ?>
-           <button
-               class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-               type="button" onclick="location.href='?strana=<?=((int)($strana+1))?>'">
-               Следна
-           </button>
-           <?php
-            }
-<<<<<<< HEAD
-=======
-========
                 
            
-                $total_pages = ceil($brknigi / $per_page);
+
             
                 if($brknigi > $per_page){
-                              
+
+                    if($strana > $total_pages){
+                        echo "";
+                    }else{
+
                     if((int)($strana) == 1){
-   
+                        echo "";
                             }else{
                                 ?>
                             <button
                     class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                    type="button" onclick="location.href='?strana=1'">
+                    type="button" onclick="location.href='?podredi=<?=$order?>&sort=<?=$sort?>&strana=1&prikazi=<?=$per_page?>'">
                     Прва
                 </button>
                         <button
                             class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            type="button" onclick="location.href='?strana=<?=((int)($strana-1))?>'">
+                            type="button" onclick="location.href='?podredi=<?=$order?>&sort=<?=$sort?>&strana=<?=((int)($strana-1))?>&prikazi=<?=$per_page?>'">
                             <
                         </button>
                         <?php
@@ -502,7 +414,7 @@ if(($strana) == $number_of_pages){
                         ?>
                         <button
                         class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button"
-                        onclick="location.href='?strana=<?=((int)($p))?>'">
+                        onclick="location.href='?podredi=<?=$order?>&strana=<?=((int)($p))?>&prikazi=<?=$per_page?>'">
                             <?php
                             if ($p == $strana) {
                                 echo "<b>".$p."</b>";
@@ -520,17 +432,17 @@ if(($strana) == $number_of_pages){
                     }
 
                     if(($strana) == $number_of_pages){
-
+                        echo "";
                             }else{
                                 ?>
                            <button
                                class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                               type="button" onclick="location.href='?strana=<?=((int)($strana+1))?>'">
+                               type="button" onclick="location.href='?podredi=<?=$order?>&sort=<?=$sort?>&strana=<?=((int)($strana+1))?>&prikazi=<?=$per_page?>'">
                                >
                            </button>
                            <button
                                class="rounded border border-slate-300 py-2.5 px-3 text-center text-xs font-semibold text-slate-600 transition-all hover:opacity-75 focus:ring focus:ring-slate-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                               type="button" onclick="location.href='?strana=<?=$total_pages?>'">
+                               type="button" onclick="location.href='?podredi=<?=$order?>&sort=<?=$sort?>&strana=<?=$total_pages?>&prikazi=<?=$per_page?>'">
                                Последна
                            </button>
                            <?php
@@ -538,11 +450,9 @@ if(($strana) == $number_of_pages){
                             ?>
 
                            <?php
-                }    
-      
+                }
+            }
 
->>>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7:views/knigi.view.php
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
         ?>
 
            </div>

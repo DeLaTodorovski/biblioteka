@@ -12,33 +12,84 @@
             <a href="<?= realUrl('korisnici') ?>" class="text-blue-500 underline"><< назад...</a>
         </p>
 
-            <?php if (isset($message['success'])) : ?> 
-                <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-green-100 bg-green-700 border border-green-700 ">
-            <div slot="avatar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle w-5 h-5 mx-2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-            </div>
-            <div class="text-xl font-normal  max-w-full flex-initial">
-                <div class="py-2">Success!
-                    <div class="text-sm font-base"><?= $message['success'] ?></div>
-                </div>
-            </div>
-            <div class="flex flex-auto flex-row-reverse">
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-green-400 rounded-full w-5 h-5 ml-2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </div>
-            </div>
-        </div>
-            <?php endif; ?>
+                <?php if (isset($message['success'])) : ?>
+                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-green-100 bg-green-700 border border-green-700 ">
+                        <div slot="avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle w-5 h-5 mx-2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="text-xl font-normal  max-w-full flex-initial">
+                            <div class="py-2">Успешно!
+                                <div class="text-sm font-base"><?= $message['success'] ?></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-auto flex-row-reverse">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-green-400 rounded-full w-5 h-5 ml-2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if (isset($message['errors'])) : ?>
+                    <div class="flex justify-center items-center m-1 font-medium py-1 px-2 mb-6 rounded-md text-red-100 bg-red-700 border border-red-700 ">
+                        <div slot="avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle w-5 h-5 mx-2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="text-xl font-normal  max-w-full flex-initial">
+                            <div class="py-2">Грешка!
+                                <div class="text-sm font-base">
+                                    <?php
+
+                                    foreach ($message['errors'] as $error){
+                                        echo $error;
+                                    }
+
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-auto flex-row-reverse">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x cursor-pointer hover:text-green-400 rounded-full w-5 h-5 ml-2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
                 <form method="POST" enctype="multipart/form-data">
                     <div class="shadow sm:overflow-hidden sm:rounded-md">
                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
+                            <div>
+                                <label
+                                        for="imeKniga"
+                                        class="block text-sm font-medium text-gray-700"
+                                >Сопствено ID</label>
+                                <div class="mt-1">
+                                    <input type="number"
+                                           id="bid"
+                                           name="bid"
+                                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                           value="<?= $_POST['bid'] ?? '' ?>" >
+
+                                    <?php if (isset($errors['bid'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['bid'] ?></p>
+                                    <?php endif; ?>
+                                    <?php if (isset($errors['empty'])) : ?>
+                                        <p class="text-red-500 text-xs mt-2"><?= $errors['empty'] ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         <div>
                                 <label
                                     for="imeKniga"

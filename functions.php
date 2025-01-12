@@ -68,74 +68,102 @@ function url_exists($url) {
     return curl_init($url) !== false;
 }
 
-function passwordEncript ($string, $key){
-    $iv = mcrypt_create_iv(
-        mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC),
-        MCRYPT_DEV_URANDOM
-    );
-    
-    $encrypted = base64_encode(
-        $iv .
-        mcrypt_encrypt(
-            MCRYPT_RIJNDAEL_128,
-            hash('sha256', $key, true),
-            $string,
-            MCRYPT_MODE_CBC,
-            $iv
-        )
-    );
-}
+//will find all occurances of all words and make them strong in html
+function strong_words( $title, $searched_words_array) {
+    //for all words in array
+    foreach ($searched_words_array as $word){
 
-function passwordDecript ($string, $key){
-
-    $data = base64_decode($encrypted);
-$iv = substr($data, 0, mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC));
-
-    $decrypted = rtrim(
-        mcrypt_decrypt(
-            MCRYPT_RIJNDAEL_128,
-            hash('sha256', $key, true),
-            substr($data, mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC)),
-            MCRYPT_MODE_CBC,
-            $iv
-        ),
-        "\0"
-        
-    );
-}
-
-class Encryption {
-
-    public  function safe_b64encode($string) {
-        $data = base64_encode($string);
-        $data = str_replace(array('+','/','='),array('-','_',''),$data);
-        return $data;
-    }
-
-    public function safe_b64decode($string) {
-        $data = str_replace(array('-','_'),array('+','/'),$string);
-        $mod4 = strlen($data) % 4;
-        if ($mod4) {
-            $data .= substr('====', $mod4);
+        $lastPos = 0;
+        $positions = array();
+        //find all positions of word
+        while (($lastPos = stripos($title, $word, $lastPos))!== false) {
+            $positions[] = $lastPos;
+            $lastPos = $lastPos + strlen($word);
         }
-        return base64_decode($data);
+        //reverse sort numeric array
+        rsort($positions);
+
+        // highlight all occurances
+        foreach ($positions as $pos) {
+            $title = strong_word($title , $word, $pos);
+        }
     }
 
-    public  function encode($value, $skey){ 
-        if(!$value){return false;}
-        $text = $value;
-        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-        $crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $skey, $text, MCRYPT_MODE_ECB, $iv);
-        return trim($this->safe_b64encode($crypttext)); 
+//apply strong html code to occurances
+    $title = str_replace('#####','</strong>',$title);
+    $title = str_replace('*****','<strong style="background-color: yellow;">',$title);
+    return $title; // return highlighted data
+}
+
+
+function strong_word($title , $word, $pos){
+//ugly hack to not use <strong> , </strong> here directly, as it can get replaced if searched word contains charcters from strong
+    $title = substr_replace($title, '#####', $pos+strlen($word) , 0) ;
+    $title = substr_replace($title, '*****', $pos , 0) ;
+    return $title;
+}
+
+function dateDiffInDays($date1, $date2)
+{
+    if (strtotime($date2) < strtotime($date1)) {
+            // Calculating the difference in timestamps
+        $diff = strtotime($date2) - strtotime($date1);
+    if (abs(round($diff / 86400)) != 1) {
+        $mp = "а";
+    }else{
+        $mp= "";
+    }
+    // 1 day = 24 hours
+    // 24 * 60 * 60 = 86400 seconds
+
+    return "<p style='color: red'>+" .abs(round($diff / 86400)). " ден".$mp.".</p>";
+
+        }else{
+        // Calculating the difference in timestamps
+        $diff = strtotime($date2) - strtotime($date1);
+
+        // 1 day = 24 hours
+        // 24 * 60 * 60 = 86400 seconds
+        if (abs(round($diff / 86400)) != 1) {
+            $mp = "а";
+        }else{
+            $mp= "";
+        }
+        return "<p style='color: green'>Уште " .abs(round($diff / 86400)). " ден".$mp.".</p>";
     }
 
-    public function decode($value, $skey){
-        if(!$value){return false;}
-        $crypttext = $this->safe_b64decode($value); 
-        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-        $decrypttext = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $skey, $crypttext, MCRYPT_MODE_ECB, $iv);
-        return trim($decrypttext);
+}
+
+function kategorijaKniga($broj)
+{
+    if ($broj === 0){
+        return 'Учебници';
+    }elseif ($broj === 1){
+        return 'Лектири';
+    }elseif ($broj === 2){
+        return 'Стручна литература';
+    }elseif ($broj === 3){
+        return 'Списанија';
+    }else{
+        return 'Друго';
+    }
+}
+
+function statusKniga($broj)
+{
+    if ($broj === 0){
+        return ' <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
+                       <span class="">нова</span><div>';
+    }elseif ($broj === 1){
+        return '<div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-yellow-500/20">
+                       <span class="">зачувана</span></div>';
+    }elseif ($broj === 2){
+        return '<div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-orange-500/20">
+                       <span class="">стара</span></div>';
+    }elseif ($broj === 3){
+        return '<div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-red-500/20">
+                       <span class="">оштетена</span></div>';
+    }else{
+        return 'Друго';
     }
 }

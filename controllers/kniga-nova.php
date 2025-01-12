@@ -1,4 +1,5 @@
 <?php
+global $compressedImage;
 require 'Validator.php';
 
 $config = require 'config.php';
@@ -9,78 +10,52 @@ $heading = 'Додади книга';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
 
-    if (! Validator::string($_POST['imeKniga'], 1, 225)) {
-        $errors['imeKniga'] = 'A body of no more than 225 characters is required.';
+    if (! Validator::string($_POST['imeKniga'], 1, 100)) {
+        $errors['imeKniga'] = 'Не треба да содржи помалку од 1 и повеќе од 100 карактери.<br>';
     }
     if (! Validator::string($_POST['objasnuvanje'], 1, 1000)) {
-        $errors['objasnuvanje'] = 'A body of no more than 1000 characters is required.';
+        $errors['objasnuvanje'] = 'Не треба да содржи помалку од 1 и повеќе од 1000 карактери.<br>';
     }
 
     if (! Validator::emptyPost('imeKniga') ){
-        $errors['imeKniga'] = 'Полето е задолжително.';
+        $errors['imeKniga'] = 'Полето Наслов е задолжително.<br>';
     }
-    
-    if (! Validator::emptyPost('objasnuvanje') ){
-<<<<<<< HEAD
-        $errors['objasnuvanje'] = 'Полето е задолжително.';
-=======
-        $errors['objasnuvanje'] = 'Полето е задолжително.';  
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
-    }
+
     if (! Validator::emptyPost('avtori') ){
-        $errors['avtori'] = 'Полето е задолжително.';
-    }
-    if (! Validator::emptyPost('tiraz') ){
-        $errors['tiraz'] = 'Полето е задолжително.';
+        $errors['avtori'] = 'Полето Автори е задолжително.<br>';
     }
     if (! Validator::emptyPost('izdavac') ){
-        $errors['izdavac'] = 'Полето е задолжително.';
+        $errors['izdavac'] = 'Полето Издавач е задолжително.<br>';
     }
     if (! Validator::emptyPost('godina') ){
-        $errors['godina'] = 'Полето е задолжително.';
+        $errors['godina'] = 'Полето Година е задолжително.<br>';
     }
-<<<<<<< HEAD
-=======
     if (! Validator::emptyPost('kolicina') ){
-        $errors['godina'] = 'Полето е задолжително.';
+        $errors['godina'] = 'Полето Количина е задолжително.<br>';
     }
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
-
+//    if (! Validator::emptyFiles('slika') ){
+//        $errors['godina'] = 'Полето Количина е задолжително.<br>';
+//    }
 
 
 if(isset($_FILES["slika"]) && !empty($_FILES["slika"]["name"])) {
 
     require 'fileupload.php';
 
-    if ($compressedImage === ''){
+    if ($compressedImage == ''){
         $compressedImage = "views/resourses/images/default-image_0.jpeg";
     }
 
 }else{
+    echo "<script type='text/javascript'>alert('Доколку немате одберено слика, автоматски ќе се додели стандардната фотографија од сајтот!');</script>";
     $compressedImage = "views/resourses/images/default-image_0.jpeg";
 }
 
 
 
     if (empty($errors)) {
-<<<<<<< HEAD
-        $db->query('INSERT INTO knigi(imeKniga, objasnuvanje, slika, tiraz, kategorija, avtori, izdavac, godina, oddelenie, cena, stat) VALUES(:imeKniga, :objasnuvanje, :slika, :tiraz, :kategorija, :avtori, :izdavac, :godina, :oddelenie, :cena, :stat)', [
-            'imeKniga' => $_POST['imeKniga'],
-            'objasnuvanje' => $_POST['objasnuvanje'],
-            'slika' => $compressedImage,
-            'tiraz' => $_POST['tiraz'],
-            'kategorija' => $_POST['kategorija'],
-            'avtori' => $_POST['avtori'],
-            'izdavac' => $_POST['izdavac'],
-            'godina' => $_POST['godina'],
-            'oddelenie' => $_POST['oddelenie'],
-            'cena' => $_POST['cena'],
-            'stat' => $_POST['stat']
-        ]);
-            $message['success'] = 'Успешно внесена книга со наслов' .$_POST['imeKniga'];
-=======
-        if($_POST['stat']  > 1){
-            for($i=0; $i <= $_POST['stat']; $i++){
+        if($_POST['kolicina']  > 1){
+            for($i=0; $i <= $_POST['kolicina']; $i++){
                 $db->query('INSERT INTO knigi(imeKniga, objasnuvanje, slika, tiraz, kategorija, avtori, izdavac, godina, oddelenie, cena, stat) VALUES(:imeKniga, :objasnuvanje, :slika, :tiraz, :kategorija, :avtori, :izdavac, :godina, :oddelenie, :cena, :stat)', [
                     'imeKniga' => $_POST['imeKniga'],
                     'objasnuvanje' => $_POST['objasnuvanje'],
@@ -94,7 +69,8 @@ if(isset($_FILES["slika"]) && !empty($_FILES["slika"]["name"])) {
                     'cena' => $_POST['cena'],
                     'stat' => $_POST['stat']
                 ]);
-                    $message['success'] = 'Успешно внесена книга со наслов' .$_POST['imeKniga'];
+                    $message['success'] = 'Успешно внесени '.$_POST['kolicina'].' книги со наслов' .$_POST['imeKniga'];
+                //            header('Refresh: 1; URL='.$_SERVER['REQUEST_URI'].'&status=success');
             }
 
         }else{
@@ -112,8 +88,10 @@ if(isset($_FILES["slika"]) && !empty($_FILES["slika"]["name"])) {
                 'stat' => $_POST['stat']
             ]);
                 $message['success'] = 'Успешно внесена книга со наслов' .$_POST['imeKniga'];
+            //            header('Refresh: 1; URL='.$_SERVER['REQUEST_URI'].'&status=success');
         }
->>>>>>> e28b6eda08b2a3925019d41e7db14efec29714e7
+    }else{
+        $message['errors'] = $errors;
     }
 }
 
