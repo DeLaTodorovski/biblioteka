@@ -12,5 +12,7 @@ return [
     '/zadolzi' => 'controllers/zadolzi.php',
     '/razdolzi' => 'controllers/razdolzi.php',
     '/contact' => 'controllers/contact.php',
-    '/ucenici-data' => 'controllers/usersData.php'
+    '/ucenici-data' => 'controllers/usersData.php',
+    '/knigi-data' => 'controllers/knigiData.php',
+    '/zadolzeni-data' => 'controllers/zadolzeniData.php'
 ];
