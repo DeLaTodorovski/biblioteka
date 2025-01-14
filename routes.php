@@ -14,5 +14,6 @@ return [
     '/contact' => 'controllers/contact.php',
     '/ucenici-data' => 'controllers/usersData.php',
     '/knigi-data' => 'controllers/knigiData.php',
-    '/zadolzeni-data' => 'controllers/zadolzeniData.php'
+    '/zadolzeni-data' => 'controllers/zadolzeniData.php',
+    '/banirani-data' => 'controllers/baniraniData.php'
 ];

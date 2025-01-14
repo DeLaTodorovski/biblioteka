@@ -72,6 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->query('DELETE FROM ucenici WHERE id = :id '.$orBy.' '.$order.' '.$sort.'', [
             'id' => $_POST['pid']
         ]);
+        $db->query('DELETE FROM zadolzi WHERE ucenik_id = :id', [
+            'id' => $_POST['pid']
+        ]);
         $message['success'] = 'Успешно избришан податок со ID #'.$_POST['pid'] ;
         header('Refresh: 1; URL='.$_SERVER['REQUEST_URI'].'&status=success');
     }
