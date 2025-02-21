@@ -38,11 +38,6 @@ if(isset($_POST["pobaraj"])){
     $brucenici = $db->query('select * from ucenici WHERE stat = 2')->rowCount();
 
 
-
-
-
-
-
     echo "
     <table border='1' id='ReportTable' class='myClass'>
         <thead>
